@@ -1,0 +1,32 @@
+# This references the default golang container from
+# the Docker Hub: https://registry.hub.docker.com/u/library/golang/
+# If you want Google's container you would reference google/golang
+# Read more about containers on our dev center
+# https://devcenter.wercker.com/overview-and-core-concepts/containers/
+box: python:2.7-slim
+# This is the build pipeline. Pipelines are the core of wercker
+# Read more about pipelines on our dev center
+# https://devcenter.wercker.com/development/pipelines/
+
+# You can also use services such as databases. Read more on our dev center:
+# https://devcenter.wercker.com/administration/services/
+# services:
+    # - postgres
+    # https://devcenter.wercker.com/administration/services/examples/postgresql/
+
+    # - mongo
+    # https://devcenter.wercker.com/administration/services/examples/mongodb/
+command-timeout: 55
+no-response-timeout: 2
+build:
+  # The steps that will be executed on build
+  # Steps make up the actions in your pipeline
+  # Read more about steps on our dev center:
+  # https://devcenter.wercker.com/development/steps/
+  steps:
+    - install-packages:
+        packages: unzip wget
+    - script:
+        name: build
+        code: |
+          bash < build
